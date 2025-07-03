@@ -1,0 +1,22 @@
+{% load static %}
+{% block content %}
+<h1>Checkout</h1>
+
+<ul>
+  {% for item in items %}
+    <li>
+      {{ item.furniture.name }} - {{ item.quantity }} × {{ item.furniture.price }} Rs
+    </li>
+  {% endfor %}
+</ul>
+
+<p>Subtotal: {{ total }} Rs</p>
+<p>Shipping: {{ shipping }} Rs</p>
+<hr>
+<p><strong>Total: {{ grand_total }} Rs</strong></p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Place Order</button>
+</form>
+{% endblock %}

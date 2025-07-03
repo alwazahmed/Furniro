@@ -1,0 +1,43 @@
+
+{% load cart_extras %}
+{% load static %}
+
+{% block content %}
+<body>
+  
+<h1>Your Shopping Cart</h1>
+<div class="cart-actions">
+  <a href="{% url 'home' %}">Continue Shopping</a>
+{% if items %}
+  <ul>
+    {% for item in items %}
+    {% if item.quantity > 1 %}
+      <li>
+        <img src="{{ item.furniture.image.url }}" width="100" />
+        <strong>{{ item.furniture.name }}</strong> –
+        <a href="{% url 'decrease_quantity' item.id %}">➖</a>
+        {{ item.quantity }}
+        <a href="{% url 'increase_quantity' item.id %}">➕</a> 
+        <br>
+        <a><strong>Cart Total:</strong> {{ total }} Rs</a>
+    {% else %}
+    <img src="{{ item.furniture.image.url }}" width="100" />
+        <strong>{{ item.furniture.name }}</strong> –
+        <a href="{% url 'decrease_quantity' item.id %}">Remove</a>
+        {{ item.quantity }}
+        <a href="{% url 'increase_quantity' item.id %}">➕</a>
+        Total: {{ item.quantity|multiply:item.furniture.price }} Rs
+      </li>
+    {% endif %}  
+    {% endfor %}
+  </ul>
+  <a><strong>Cart Total:</strong> {{ total }} Rs</a>
+  <a><strong>shipping:</strong> {{ shipping }} Rs</a>
+  <a><strong>Grand Total:</strong> {{ GrandTotal }} Rs</a>
+  <a href="{% url 'checkout' %}" class="checkout-button">Proceed to Checkout</a>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+
+{% endblock %}
+</body>

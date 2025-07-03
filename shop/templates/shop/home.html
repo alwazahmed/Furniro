@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Furniture World</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'shop/Assets/favii.ico' %}" type="image/x-icon" />
+    <!-- normalize -->
+    <link rel="stylesheet" href="./CSS/normalize.css" />
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- main.css -->
+     <link rel="stylesheet" href="{% static 'shop/CSS/Main.css' %}">
+  </head>
+  
+  <body>
+    <!-- navbar -->
+    <div class="navbar">
+        <!-- logo -->
+         <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'shop/Assets/navbar/logo.png' %}" alt="logo">
+            <p>Furniro</p>
+            {% if user.is_authenticated %}
+              <span class="username">Hello, {{ user.username }}!</span>
+            {% endif %}
+        </a>
+        
+        <!-- middle options -->
+         <div class="middle-links">
+            <a href="{% url 'home' %}" class="Home">Home</a>
+            <a href="./shop.html" class="Shop">Shop</a>
+            <a href="./about.html" class="About">About</a>
+            <a href="./contact.html" class="Contact">Contact</a>
+         </div>
+         <!-- icons -->
+          <div class="icons">
+            
+            <a href="./home.html"><img src="{% static 'shop/Assets/navbar/bell-ring.svg' %}" alt="alert"></a>
+            <a href="./home.html"><img src="{% static 'shop/Assets/navbar/search.svg' %}" alt="search"></a>
+            <a href="./home.html"><img src="{% static 'shop/Assets/navbar/heart.svg' %}" alt="liked"></a>
+            <a href="./cart.html"><img src="{% static 'shop/Assets/navbar/shopping-cart.svg' %}" alt="cart"></a>
+            <!-- Authentication Links -->
+            {% if user.is_authenticated %}
+            
+            <span class="Log">
+              <a href="{% url 'logout' %}"><img src="{% static 'shop/Assets/navbar/logout.svg' %}" alt="logout"></a>
+            </span>
+            {% else %}
+            <span class="Log">
+              <a href="{% url 'login' %}"><img src="{% static 'shop/Assets/navbar/login.svg' %}" alt="login"></a>
+               </span>
+              {% endif %}
+            
+          </div>
+    </div>
+
+
+    <!-- Hero -->
+     <div class="hero">
+        <div class="banner">
+            <p class="head-text">New Arrival</p>
+            <h1>Discover Our New Collection</h1>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
+            <a href="./home.html">BUY NOW</a>
+        </div>
+     </div>
+
+     <!-- Range -->
+     <div class="range">
+      <div class="heading">
+         <h2>Browse The Range</h2>
+         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+      <div class="cards">
+         <div class="card">
+            <img src="{% static 'shop/Assets/Cards/Bed.jpg' %}
+
+" alt="bed">
+            <p>Bedroom</p>
+         </div>
+
+         <div class="card">
+            <img src="{% static 'shop/Assets/Cards/Dining.jpg' %}
+
+" alt="Dining">
+            <p>Dining</p>
+         </div>
+
+         <div class="card">
+            <img src="{% static 'shop/Assets/Cards/living.jpg' %}
+
+" alt="living">
+            <p>Living</p>
+         </div>
+      </div>
+     </div>
+
+     <!-- products -->
+<h1 class="products-heading">Our Products</h1>
+
+<div class="furniture-cards">
+  {% for item in furniture_items %}
+    <div class="single-card">
+      <img src="{{ item.image.url }}" alt="{{ item.name }}">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <div class="price">
+        <p class="price">{{ item.price }} Rs</p>
+        {% if item.old_price %}
+          <span>{{ item.old_price }} Rs</span>
+        {% endif %}
+      </div>
+      <a href="{% url 'add_to_cart' item.id %}" class="Buy-option">Add to Cart</a>
+    </div>
+  {% endfor %}
+</div>
+
+
+         
+      </div>
+      <div class="Btn"><a href="./home.html">Show More</a></div>
+
+      <!-- footer -->
+       <div class="footer">
+         <div class="furniro">
+            <p>Furniro.</p>
+            <span>400 University Drive Suite 200 Coral Gables,
+               FL 33134 USA</span>
+         </div>
+
+         <div class="links">
+            <h4 class="abc">Links</h4>
+            <a href="./home.html">Home</a>
+            <a href="./home.html">Shop</a>
+            <a href="./home.html">About</a>
+            <a href="./home.html">Contact</a>
+         </div>
+         <div class="links">
+            <h4 class="abc">Help</h4>
+            <a href="./home.html">Payment Option</a>
+            <a href="./home.html">Returns</a>
+            <a href="./home.html">Privacy Policies</a>
+         </div>
+         <div class="links">
+            <h4 class="abc">Newsletter</h4>
+            <div class="inp"><input type="email" name="alwaz" placeholder="Enter Your Email Adress" class="text-box">
+            <input type="button" value="SUBSCRIBE" class="batan"></div>
+            
+         </div>
+       </div>
+       <div class="copyright">
+         <span>2024 Furino. All rights reverved Made by</span><a href="https://github.com/alwazahmed">Alwaz Ahmed</a>
+         
+       </div>
+      
+  </body>

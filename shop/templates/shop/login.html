@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - Furniture Shop</title>
+    <link rel="stylesheet" href="{% static 'shop/CSS/login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
+        <p>Don’t have an account? <a href="{% url 'signup' %}">Create one</a></p>
+    </div>
+</body>
+</html>
