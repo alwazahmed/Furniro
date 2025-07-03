@@ -1,14 +1,22 @@
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
+*.py[cod]
+*.env
 *.sqlite3
 *.log
-.env
-*.pot
-*.py[cod]
+
+# Virtual environment
+env/
+
+# Django static/media
+staticfiles/
+media/
+
+# VS Code
+.vscode/
+
+# System files
 .DS_Store
-db.sqlite3
+
+# Secrets (optional)
+.env
